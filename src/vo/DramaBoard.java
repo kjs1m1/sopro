@@ -1,6 +1,6 @@
 package vo;
 
-public class SolBoard {
+public class DramaBoard {
     private int bdno;
     private String userid;
     private String title;

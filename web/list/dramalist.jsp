@@ -1,9 +1,38 @@
-
+<%@ page import="java.util.HashMap" %>
+<%@ page import="vo.DramaBoard" %>
+<%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
+<jsp:useBean id="dramafdao" class="dao.dramaFactory" scope="session"/>
+
+<%
+    request.setCharacterEncoding("utf-8");
+
+    String colname = request.getParameter("colname");
+    String findtext = request.getParameter("findtext");
+
+    if (colname == null || colname.equals(""))
+        colname="selected";
+
+    if (findtext == null || findtext.equals(""))
+        findtext="";
+
+            // 검색기능
+    HashMap<String, String> searchList = new HashMap<>();
+        //1. 해시맵을 선언하고
+    searchList.put(colname, findtext);
+    //2. 키 벨류로 받는데 (키:옵션테그 선택값 , 벨류 : 찾는단어(input))
 
 
 
+    System.out.println("colname : " + colname);
+    System.out.println("findtext : " + findtext);
+
+    ArrayList<DramaBoard> dblists = dramafdao.dramaList(searchList);
+            //해시맵ㅇ
+    session.setAttribute("dblists", dblists);
+
+%>
 <html>
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -46,6 +75,7 @@
 
 <body>
 <div class="container">
+    <%@include file="layout/header.jsp" %>
 
     <div class="main">
         <div class="row">
@@ -72,15 +102,17 @@
             </div>
 
             <div class="col-sm-9 row">
-
+                    <!-- i=0 인데 i가 dblists.size보다 작을때 까지 반복 size=총게시물 -->
+                <%for (int i = 0; i < dblists.size(); i++) { %>
                     <div style="width: 150px; height: 150px; margin: 20px;">
                      <div class="thumbnail bootsnipp-thumb" style="padding:0;">
                         <div class="imgwrap" style="height: 100px;">
-                            <a href="dogView.jsp?bdno=">
+                            <a href="dramaView.jsp?bdno=<%=dblists.get(i).getBdno()%>">
+                                <img class="danlazy"
+                                     src="showimg.jsp?f=<%=dblists.get(i).getFile1()%>"
+                                     width="100%" height="100%">
                             </a>
                         </div>
-
-
 
 
 
@@ -90,7 +122,7 @@
                                 <span class="text-left"
                                       style="overflow: hidden ; text-overflow: ellipsis; white-space: nowrap;  width: 150px; height: auto; display: inline-block;  ">
                                     <%--게시글 상세보기로 넘어가는 링크작성--%>
-                                    <a href="dogView.jsp?bdno="></a>
+                                    <a href="dramaView.jsp?bdno="></a>
                                 </span>
                             </div>
                             <div class="text-leftx" style="font-size: 10pt">
@@ -101,7 +133,7 @@
                         </div>
                     </div>
                 </div>
-
+                <% } %>
             </div>
         </div>
 
