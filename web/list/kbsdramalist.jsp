@@ -3,7 +3,7 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<jsp:useBean id="dramafdao" class="dao.dramaFactory" scope="session"/>
+<jsp:useBean id="kdramafdao" class="dao.kbsdramaFactory" scope="session"/>
 
 <%
     request.setCharacterEncoding("utf-8");
@@ -28,8 +28,8 @@
     System.out.println("colname : " + colname);
     System.out.println("findtext : " + findtext);
 
-    ArrayList<DramaBoard> dblists = dramafdao.dramaList(searchList);
-            //해시맵ㅇ
+    ArrayList<DramaBoard> dblists = kdramafdao.dramaList(searchList);
+            //해시맵
     session.setAttribute("dblists", dblists);
 
 %>
@@ -80,7 +80,7 @@
     <div class="main">
         <div class="row">
             <div class="col-8" style="font-size: 25px; margin: 0 45px 0 50px ; padding:30px 0 20px 0;">
-                <i class="fa fa-comments fa-2x"> Drama</i></div>
+                <i class="fa fa-comments fa-2x"> KBS Drama 명장면</i></div>
             <div class="col-3">
                 <button type="button" class="btn btn-success" id="newbtn" style="margin:40px 0 15px 110px; ">
                     <i class="fa fa-plus-circle"> 새글쓰기</i>
@@ -93,8 +93,8 @@
                 <h3><i class="fa fa-handshake-o" aria-hidden="true"></i> 방송사</h3>
                 <ul>
                     <%--해당 카테고리 a태그는 지워고 색깔 바꿔주세요--%>
-                    <li><a href=">/catboard/catList.jsp">&block;&nbsp;&nbsp;KBS Drama</a></li>
-                    <li style="color:#919191">&block;&nbsp;&nbsp;MBC Drama</li>
+                    <li style="color:#919191">&block;&nbsp;&nbsp;KBS Drama</li>
+                    <li><a href="/reviewboard/revList.jsp">&block;&nbsp;&nbsp;MBC Drama</a></li>
                     <li><a href="/reviewboard/revList.jsp">&block;&nbsp;&nbsp;SBS Drama</a></li>
                     <li><a href="/reviewboard/revList.jsp">&block;&nbsp;&nbsp;TVN Drama</a></li>
                     <li><a href="/reviewboard/revList.jsp">&block;&nbsp;&nbsp;JTBC Drama</a></li>
@@ -113,7 +113,6 @@
                                      width="100%" height="100%">
                             </a>
                         </div>
-
 
 
                         <%--제목,날짜,조회수 표시할 부분--%>

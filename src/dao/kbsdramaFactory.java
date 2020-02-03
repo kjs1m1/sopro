@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 //게시판 jdbc 연결 나중에 spring 으로 변경 해야함
-public class dramaFactory {
+public class kbsdramaFactory {
 
     private PreparedStatement pstmt = null;
     private ResultSet rs;
@@ -78,7 +78,6 @@ public class dramaFactory {
         }
         return check;
     }
-
 
 
 
